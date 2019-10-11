@@ -1,6 +1,6 @@
 ---
 title: ES6基础语法
-permalink: /youyaxunhuan
+permalink: /ES6
 ---
 
 <h2>前言</h2>

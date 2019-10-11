@@ -1,5 +1,5 @@
 module.exports = {
-  title: '像鱼', // 设置网站标题
+  title: 'fjy128', // 设置网站标题
   description: 'Just playing around as web', //描述
   serviceWorker: true,
   base: "/blog/",
@@ -32,7 +32,7 @@ module.exports = {
     
     sidebar: [  
       {
-      title: '组件文档',
+      title: '日常使用组件集合',
       collapsable: true,
       children: [
         '/blog/node/calendar/',
@@ -40,62 +40,38 @@ module.exports = {
       ]
     },
       {
-      title: 'echart',
+      title: '图表类相关基础知识',
       collapsable: true,
       children: [
         '/blog/node/echart/'
       ]
     },
       {
-      title: 'koa2-proxy',
+      title: '服务端相关基础知识',
       collapsable: true,
       children: [
-        '/blog/node/koa2-proxy/'
+        '/blog/node/http/',
+        '/blog/node/koa2-proxy/',
+        '/blog/node/mongodb/',
+        // '/blog/node/koa2/'
       ]
     },
-    // {
-    //   title: 'koa2',
-    //   collapsable: true,
-    //   children: [
-    //     '/blog/node/koa2/'
-    //   ]
-    // },
     {
-      title:'常见的居中问题',
+      title:'前端页面布局基础知识',
       collapsable:true,
       children:[
         '/blog/node/cssCenter/'
       ]
     },
     {
-      title:'复杂判断的更优雅写法',
+      title:'前端JS基础语法知识',
       collapsable:true,
       children:[
-        '/blog/node/youyaxunhuan/'
-      ]
-    },
-    {
-      title:'ES6完全手册使用',
-      collapsable:true,
-      children:[
+        '/blog/node/youyaxunhuan/',
         '/blog/node/ES6/',
         '/blog/node/TS/',
       ]
-    },
-    {
-      title:'对象拷贝',
-      collapsable:true,
-      children:[
-        '/blog/node/cloneObj/'
-      ]
-    },
-    {
-      title:'mongodb基础知识',
-      collapsable:true,
-      children:[
-        '/blog/node/mongodb/'
-      ]
-    },
+    }
   ]
   }
 }

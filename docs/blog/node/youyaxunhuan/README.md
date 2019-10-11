@@ -1,5 +1,5 @@
 ---
-title: JavaScript复杂判断的更优雅写法
+title: 复杂判断的更优雅写法
 permalink: /youyaxunhuan
 ---
 

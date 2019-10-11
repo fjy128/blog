@@ -1,5 +1,5 @@
 ---
-title: mongodb基础知识
+title: 服务端环境搭建--mongodb
 permalink: /mongodb
 ---
 

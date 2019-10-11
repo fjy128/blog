@@ -1,5 +1,5 @@
 ---
-title: CSS 布局方案
+title: CSS 布局方案--居中
 permalink: /article
 ---
 

@@ -1,9 +1,6 @@
 ---
-title: koa2-proxy
+title: 服务端代理工具--koa2-proxy
 permalink: /koa2-proxy
----
-
-koa2-proxy 基于koa2的代理工具
 ---
 
 功能:

@@ -1,5 +1,5 @@
 ---
-title: echar相关设置简单归纳
+title: echar基础配置归纳
 permalink: /echart
 ---
 
