@@ -70,6 +70,7 @@ module.exports = {
         '/blog/node/youyaxunhuan/',
         '/blog/node/ES6/',
         '/blog/node/TS/',
+        '/blog/node/regExp/',
       ]
     }
   ]
