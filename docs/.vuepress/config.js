@@ -60,7 +60,8 @@ module.exports = {
       title:'前端页面布局基础知识',
       collapsable:true,
       children:[
-        '/blog/node/cssCenter/'
+        '/blog/node/cssCenter/',
+        '/blog/node/css/'
       ]
     },
     {
