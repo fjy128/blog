@@ -61,7 +61,8 @@ module.exports = {
       collapsable:true,
       children:[
         '/blog/node/cssCenter/',
-        '/blog/node/css/'
+        '/blog/node/css/',
+        '/blog/node/compliant/',
       ]
     },
     {
