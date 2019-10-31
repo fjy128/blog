@@ -37,3 +37,11 @@ Your Pages site will use the layout and styles from the Jekyll theme you have se
 Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
 
 [vuePress 中文文档](http://caibaojian.com/vuepress/guide/)
+
+# 执行脚本 build.sh
+
+1、mac 下运行.sh文件出现 Permission denied问题
+执行 chmod 777 build.sh
+
+2、./build.sh 执行打包
+
