@@ -46,3 +46,6 @@ Having trouble with Pages? Check out our [documentation](https://help.github.com
 
 2、./build.sh 执行打包
 
+<!-- react时间机制 -->
+<!-- https://qianduan.group/posts/5cb1b0e49fd64d5a7458a981?utm_source=gold_browser_extension -->
+
