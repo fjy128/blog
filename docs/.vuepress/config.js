@@ -69,12 +69,12 @@ module.exports = {
       title:'前端JS基础语法知识',
       collapsable:true,
       children:[
-        '/blog/node/regExp/',
         '/blog/node/js/',
-        '/blog/node/youyaxunhuan/',
         '/blog/node/ES6/',
         '/blog/node/TS/',
         '/blog/node/InterviewQuestions/',
+        '/blog/node/youyaxunhuan/',
+        '/blog/node/regExp/',
         
       ]
     }

@@ -3,14 +3,6 @@ title: JS基础知识
 permalink: /js
 ---
 
-<h2>前言</h2>
-<ul style="list-style-type:decimal-leading-zero;font-size:14px">
-<li>这里的 "ES6" 泛指 ES5 之后的新语法</li>
-<li>这里的 "完全" 是指本文会不断更新</li>
-<li>这里的 "使用" 是指本文会展示很多 ES6 的使用场景</li>
-<li>这里的 "手册" 是指你可以参照本文将项目更多的重构为 ES6 语法</li>
-</ul>
-
 1 、浅拷贝、深拷贝
 ---
 - 数组--浅拷贝
