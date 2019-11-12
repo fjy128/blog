@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'fjy128', // 设置网站标题
+  title: '空白大叔', // 设置网站标题
   description: 'Just playing around as web', //描述
   serviceWorker: true,
   base: "/blog/",

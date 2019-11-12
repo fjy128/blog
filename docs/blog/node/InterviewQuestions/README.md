@@ -54,7 +54,10 @@ sessionStorage.clear();
 2、数组的方法有哪些
 ---
 
-- 在ES5中，一共有9个Array方法 [看这里](http://kangax.github.io/compat-table/es5/)
+<h5>在ES5中，一共有9个Array方法可以替代for循环 </h5>
+
+ [看这里](http://kangax.github.io/compat-table/es5/)
+ [看这里](https://cloud.tencent.com/developer/article/1093149)
 
 ```js{0}
   Array.prototype.indexOf
