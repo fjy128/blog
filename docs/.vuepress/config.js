@@ -73,6 +73,7 @@ module.exports = {
         '/blog/node/ES6/',
         '/blog/node/TS/',
         '/blog/node/InterviewQuestions/',
+        '/blog/node/mianshiti/',
         '/blog/node/youyaxunhuan/',
         '/blog/node/regExp/',
         
