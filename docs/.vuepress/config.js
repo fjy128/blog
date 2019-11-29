@@ -1,6 +1,6 @@
 module.exports = {
-  title: '空白大叔', // 设置网站标题
-  description: 'Just playing around as web', //描述
+  title: '柠萌猿', // 设置网站标题
+  description: '前路漫漫，岁月悠悠，愿流年笑掷，愿未来可期', //描述
   serviceWorker: true,
   base: "/blog/",
   themeConfig: { //主题配置
