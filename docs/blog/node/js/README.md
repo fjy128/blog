@@ -455,6 +455,51 @@ var ary=[23,21,12,6,1,32,8];
 ---
 3、for in 、 for of 、forEach、map区别
 ---
+<!-- https://blog.csdn.net/zl13015214442/article/details/90606961 -->
+<!-- https://www.jianshu.com/p/e8e04e33fa4d -->
+| 方法     | 可遍历对象       | ES  | index OR key的类型 | 自定义属性 | 原型链上的自定义属性 |
+| --------|:---------------:| :--:|------------------ | :--------| :----------------|
+| for     | 数组、字符串      |-    |Number             |不可遍历   |不可遍历            |
+| for in  | 数组、字符串、对象 |ES5  |String             |可遍历     |可遍历             |
+| for of  | 数组、字符串      |ES6  |-                  |不可遍历   |不可遍历            |
+| forEach | 数组             |ES5  |Number             |不可遍历   |不可遍历            |
+| map     | 数组             |ES5  |Number             |不可遍历   |不可遍历            |
+
+<h5>for in遍历，根据key遍历</h5>
+
+- 根据属性名遍历所以key的类型是string，遍历顺序也可能不是实际数组的顺序。
+- 遍历数组时如果给数组增加了自定义属性，也会把自定义属性遍历出来，所以for in更适合遍历对象。
+- 如果对象原型上和原型链的对象原型上有自定义属性都会遍历出来，当不想遍历原型链的属性时可已使用hasOwnProperty过滤。注意：hasOwnProperty过滤的是自身以外的属性
+```js
+for (const key in arr) {
+    if (arr.hasOwnProperty(key)) { // 这样就可以过滤掉原型链上的可枚举属性了
+        console.log(key, arr[key]);
+    }
+}
+```
+<h5>for of遍历，根据值遍历</h5>
+
+- 用来弥补for in在遍历时不能根据值遍历的不足。
+- 由于是ES6，兼容性非常不好。
+```js
+for (const iterator of obj) { console.log(iterator); }
+```
+<h5>forEach 遍历，根据index遍历</h5>
+
+- 和for项目forEach除了写法没有任何优势。
+- forEach遍历是从头到尾遍历，没有中途跳出的方法，如：for遍历 的break。
+```js
+arr.forEach((val, i, arr) => { console.log(val); });
+```
+<h5>map 遍历，根据index遍历</h5>
+
+- 和forEach相比，map可以返回一个新数组，新数组的内容是回调函数的返回值。
+- 可以用来克隆数组。
+```js
+arr.map((val, i, arr) => { return val * 2; });
+```
+
+
 4、判断是不是数组的方法
 ---
 5、事件循环机制
