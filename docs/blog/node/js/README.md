@@ -64,7 +64,46 @@ document.writeln("数组的新值：" + arrtooo + "<br />");//Export:数组的�
 
 <h4>对象--浅拷贝</h4>
 
-- ES6 的 Object.assign()方法用于将所有可枚举属性的值从一个或多个源对象复制到目标对象。它将返回目标对象。
+- 简单的复制语句
+```js
+function simpleClone(initalObj) {
+    var obj = {};
+    for ( var i in initalObj) {
+        obj[i] = initalObj[i];
+    }
+    return obj;
+}
+
+/* ================ 客户端调用 ================ */
+var obj = {
+    a: "hello",
+    b: {
+        a: "world",
+        b: 21
+    },
+    c: ["Bob", "Tom", "Jenny"],
+    d: function() {
+        alert("hello world");
+    }
+}
+var cloneObj = simpleClone(obj); // 对象拷贝
+  
+console.log(cloneObj.b); // {a: "world", b: 21}
+console.log(cloneObj.c); // ["Bob", "Tom", "Jenny"]
+console.log(cloneObj.d); // function() { alert("hello world"); }
+  
+// 修改拷贝后的对象
+cloneObj.b.a = "changed";
+cloneObj.c = [1, 2, 3];
+cloneObj.d = function() { alert("changed"); };
+  
+console.log(obj.b); // {a: "changed", b: 21} // // 原对象所引用的对象被修改了
+  
+console.log(obj.c); // ["Bob", "Tom", "Jenny"] // 原对象所引用的对象未被修改
+console.log(obj.d); // function() { alert("hello world"); } // 原对象所引用的函数未被修改
+```
+
+- Object.assign() 方法可以把任意多个的源对象自身的可枚举属性拷贝给目标对象，然后返回目标对象。但是 Object.assign() 进行的是浅拷贝，拷贝的是对象的属性的引用，而不是对象本身。
 
 ```js{0}
 let a = {
@@ -137,6 +176,8 @@ console.log(complexObj,cloneComplexObj)
 <h5>对象、数组--深拷贝</h5>
 
 - JSON.parse(JSON.stringify(object))
+- 但是这种方法也有不少坏处，譬如它会抛弃对象的constructor。也就是深拷贝之后，不管这个对象原来的构造函数是什么，在深拷贝之后都会变成Object。
+- 这种方法能正确处理的对象只有 Number, String, Boolean, Array, 扁平对象，即那些能够被 json 直接表示的数据结构。RegExp对象是无法通过这种方式深拷贝。
 
 ```js{0}
 let a = {
