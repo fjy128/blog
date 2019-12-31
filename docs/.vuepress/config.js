@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'fjy128前端修养', // 设置网站标题
+  title: 'fjy128', // 设置网站标题
   description: 'The road ahead is long, the years are long, the years are long, the future is long', //描述
   serviceWorker: true,
   base: "/blog/",
