@@ -43,7 +43,7 @@ console.log(b);
  * 说明 slice() 方法是浅拷贝，相应的还有concat等，在工作中面对复杂数组结构要额外注意
  * **/
 ```
-- concat()
+- concat()--深拷贝
 - 该方法用于连接两个或多个数组。
 - 该方法不会改变现有的数组，而仅仅会返回被连接数组的一个副本。
 - 语法
@@ -61,7 +61,15 @@ arrtooo[1] = "set Map To";
 document.writeln("数组的原始值：" + arr + "<br />");//Export:数组的原始值：One,Two,Three
 document.writeln("数组的新值：" + arrtooo + "<br />");//Export:数组的新值：One,set Map To,Three
 ```
-
+- es6 扩展运算
+```js
+//es6 扩展运算实现深拷贝
+let arr9 = [1,2,3,4];
+let [...arr10] = arr9;
+arr9[0] = 5;
+console.log(arr9) //[5,2,3,4]
+console.log(arr10) //[1,2,3,4]
+```
 <h4>对象--浅拷贝</h4>
 
 - 简单的复制语句
@@ -228,12 +236,14 @@ console.log(b);
 ```
 - 但是该方法有以下几个问题。
 
-  - 会忽略 undefined
-  - 会忽略 symbol
+  - 拷贝的对象的值中如果有函数,undefined,symbol则经过JSON.stringify()序列化后的JSON字符串中这个键值对会消失
+  - 无法拷贝不可枚举的属性，无法拷贝对象的原型链
   - 不能序列化函数
   - 不能解决循环引用的对象
-  - 不能正确处理new Date()
-  - 不能处理正则
+  - 不能正确处理new Date(),拷贝Date引用类型会变成字符串
+  - 不能处理正则,拷贝RegExp引用类型会变成空对象
+  - 对象中含有NaN、Infinity和-Infinity，则序列化的结果会变成null
+  - 无法拷贝对象的循环应用(即obj[key] = obj)
 - undefined、symbol 和函数这三种情况，会直接忽略。
 ```js
 let obj = {
@@ -539,9 +549,8 @@ var ary=[23,21,12,6,1,32,8];
         }
     }
 ```
-2、面向对象
----
-3、for in 、 for of 、forEach、map区别
+
+2、for in 、 for of 、forEach、map区别
 ---
 <!-- https://blog.csdn.net/zl13015214442/article/details/90606961 -->
 <!-- https://www.jianshu.com/p/e8e04e33fa4d -->
@@ -567,6 +576,7 @@ for (const key in arr) {
 ```
 <h5>for of遍历，根据值遍历</h5>
 
+- for of循环可以使用的范围包括数组、Set 和 Map 结构、某些类似数组的对象（比如arguments对象、DOM NodeList 对象）。
 - 用来弥补for in在遍历时不能根据值遍历的不足。
 - 由于是ES6，兼容性非常不好。
 ```js
@@ -574,33 +584,78 @@ for (const iterator of obj) { console.log(iterator); }
 ```
 <h5>forEach 遍历，根据index遍历</h5>
 
-- 和for项目forEach除了写法没有任何优势。
-- forEach遍历是从头到尾遍历，没有中途跳出的方法，如：for遍历 的break。
+- forEach()参数函数包含三个参数(item,index,list) 数组元素 元素索引 和数组本身。
+- 后两个参数可省略。
+- 对数组进行值操作，会改变原来数组的值。
+- forEach()在循环过程中无法终止遍历，即没有break语句，可使用try catch 抛出foreach.break异常提前终止。
 ```js
 arr.forEach((val, i, arr) => { console.log(val); });
 ```
 <h5>map 遍历，根据index遍历</h5>
 
 - 和forEach相比，map可以返回一个新数组，新数组的内容是回调函数的返回值。
+- map()返回的是一个新的数组，不修改调用的数组。
 - 可以用来克隆数组。
 ```js
 arr.map((val, i, arr) => { return val * 2; });
 ```
 
 
-4、判断是不是数组的方法
+3、判断是不是数组的方法
 ---
-5、事件循环机制
+- 1. Object.prototype.toString.call()
+```js
+console.log(Object.prototype.toString.call("jerry"));//[object String]
+console.log(Object.prototype.toString.call(12));//[object Number]
+console.log(Object.prototype.toString.call(true));//[object Boolean]
+console.log(Object.prototype.toString.call(undefined));//[object Undefined]
+console.log(Object.prototype.toString.call(null));//[object Null]
+console.log(Object.prototype.toString.call({name: "jerry"}));//[object Object]
+console.log(Object.prototype.toString.call(function(){}));//[object Function]
+console.log(Object.prototype.toString.call([]));//[object Array]
+console.log(Object.prototype.toString.call(new Date));//[object Date]
+console.log(Object.prototype.toString.call(/\d/));//[object RegExp]
+function Person(){};
+console.log(Object.prototype.toString.call(new Person));//[object Object]
+```
+- 2. instanceof : 通过判断对象的原型链中是不是能找到类型的 prototype。
+```js
+let Person=function(){};
+let p=new Person();
+console.log(1 instanceof Number);  // false
+console.log('string' instanceof String); // false
+console.log(new Boolean(false) instanceof Boolean); // true
+console.log(p instanceof Person); // true
+```
+- 3. Array.isArray():用来判断对象是否为数组(ES5新增的方法).当检测Array实例时，Array.isArray 优于 instanceof ，因为 Array.isArray 可以检测出 iframes.
+```js
+var iframe = document.createElement('iframe');
+document.body.appendChild(iframe);
+xArray = window.frames[window.frames.length-1].Array;
+var arr = new xArray(1,2,3); // [1,2,3]
+
+// Correctly checking for Array
+Array.isArray(arr);  // true
+Object.prototype.toString.call(arr); // true
+// Considered harmful, because doesn't work though iframes
+arr instanceof Array; // false
+```
+- 4. constructor:和instanceof原理差不多。需要事先知道待判断的对象大概属于何种类型，所以该方法更准确地说，是用来验证的。如果我们事先根本不知道一个对象实例的出处，那就不好使了。
+```js
+let arr=[1,2,4];
+alert(arr.constructor===Array); // true
+```
+4、事件循环机制
 ---
-6、面向对象
+5、面向对象
 ---
   [深拷贝、浅拷贝参考地址](https://www.jb51.net/article/99013.htm)(wan)
   [深拷贝、浅拷贝参考地址](https://juejin.im/post/5c20509bf265da611b585bec)(wan)
   [深拷贝、浅拷贝参考地址](https://www.jb51.net/article/105659.htm)(wan)
   [深拷贝、浅拷贝参考地址](https://juejin.im/post/59ac1c4ef265da248e75892b)(wan)
-  [深拷贝、浅拷贝参考地址](https://juejin.im/post/5c26dd8fe51d4570c053e08b)
-  [深拷贝、浅拷贝参考地址](https://www.cnblogs.com/Chansea/p/copy.html)
+  [深拷贝、浅拷贝参考地址](https://juejin.im/post/5c26dd8fe51d4570c053e08b)(wan)
+  [深拷贝、浅拷贝参考地址](https://www.cnblogs.com/Chansea/p/copy.html)(wan)
   [深拷贝、浅拷贝参考地址](https://www.cnblogs.com/yubingyang/p/11576515.html)
-  [堆、堆、深拷贝、浅拷贝参考地址](https://www.cnblogs.com/biaochenxuying/p/11438353.html)
-  [12种继承模式参考地址](https://cloud.tencent.com/developer/article/1192722)
+  [堆、堆、深拷贝、浅拷贝参考地址](https://www.cnblogs.com/biaochenxuying/p/11438353.html)(wan)
+  [12种继承模式参考地址](https://cloud.tencent.com/developer/article/1192722)(wan)
   [ES6参考地址](https://juejin.im/post/5dc8a231f265da4d40712f8a?utm_source=gold_browser_extension)

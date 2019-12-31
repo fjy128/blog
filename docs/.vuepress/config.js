@@ -1,6 +1,6 @@
 module.exports = {
   title: 'fjy128前端修养', // 设置网站标题
-  description: '前路漫漫，岁月悠悠，流年笑掷，未来可期', //描述
+  description: 'The road ahead is long, the years are long, the years are long, the future is long', //描述
   serviceWorker: true,
   base: "/blog/",
   themeConfig: { //主题配置
