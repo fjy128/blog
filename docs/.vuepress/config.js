@@ -31,7 +31,7 @@ module.exports = {
     ],
 
     sidebar: [{
-        title: '日常使用组件集合',
+        title: '日常使用组件',
         collapsable: true,
         children: [
           '/blog/node/calendar/',
@@ -39,14 +39,14 @@ module.exports = {
         ]
       },
       {
-        title: '图表类相关基础知识',
+        title: '图表类基础知识',
         collapsable: true,
         children: [
           '/blog/node/echart/'
         ]
       },
       {
-        title: '服务端相关基础知识',
+        title: '服务端基础知识',
         collapsable: true,
         children: [
           '/blog/node/http/',
@@ -56,7 +56,7 @@ module.exports = {
         ]
       },
       {
-        title: '前端页面布局基础知识',
+        title: 'Div+CSS局基础知识',
         collapsable: true,
         children: [
           '/blog/node/cssCenter/',
@@ -65,7 +65,7 @@ module.exports = {
         ]
       },
       {
-        title: '前端JS基础语法知识',
+        title: 'JS基础知识',
         collapsable: true,
         children: [
           '/blog/node/js/',
@@ -75,7 +75,13 @@ module.exports = {
           '/blog/node/mianshiti/',
           '/blog/node/youyaxunhuan/',
           '/blog/node/regExp/',
-
+        ]
+      },
+      {
+        title: '项目版本管理',
+        collapsable: true,
+        children: [
+          '/blog/node/git/',
         ]
       }
     ]
