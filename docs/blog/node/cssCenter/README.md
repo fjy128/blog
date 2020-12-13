@@ -131,7 +131,7 @@ permalink: /article
 
 3、水平垂直
 ---
-<p>a) inline-block + table-cell + text-align + vertical-align</p>
+<p>1) inline-block + table-cell + text-align + vertical-align,父元素不能使用浮动，使用浮动垂直居中失效</p>
 
 ``` css{0}
 <style>
@@ -149,7 +149,7 @@ permalink: /article
 <p>tips：兼容至IE8 </p>
 
 
-<p>b) absolute + transform</p>
+<p>2) absolute + transform</p>
 
 ``` css{0}
 <style>
@@ -167,7 +167,7 @@ permalink: /article
 ```
 <p>tips：兼容性稍差，兼容IE10以上</p>
 
-<p>c) flex</p>
+<p>3) flex最优雅的方法</p>
 
 ``` css{0}
 <style>
@@ -180,6 +180,77 @@ permalink: /article
 </style>
 ```
 <p>tips：兼容差</p>
+
+<p>4)margin+transform</p>
+
+```css{0}
+<style>
+  .parent{
+   overflow:hidden;
+  }
+  .child{
+    margin:50% auto;
+    transform:translateY(-50%)
+  }
+</style>
+```
+
+<P>5)inline-block+vertical-align</P>
+
+```css{0}
+<style>
+  .parent{
+   text-align:center;
+   line-height:300px;
+  }
+  .child{
+    display:inline-block;
+    vertical-align:middle;
+  }
+</style>
+```
+
+<p>6)abslute+负margin</p>
+
+```css{0}
+  .parent{
+    position: relative;
+    }
+  .child{
+    position :absolute;
+    left:50%;
+    top:50%;
+    margin-left:-50px;
+    margin-top:-50px
+  }
+```
+
+<p>7)absoulte+margin:auto</p>
+
+```css{0}
+  .parent{
+    position:relative;
+  }
+  .child{
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    margin:auto;
+  }
+```
+<p>8)最新的方法grid</p>
+
+```css{0}
+  .parent{
+    display:grid;
+  }
+  .child{
+    align-self:center;
+    justify-self:center;
+  }
+```
 
 4、多列布局--一列定宽，一列自适应
 ---
