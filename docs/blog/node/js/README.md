@@ -365,6 +365,50 @@ function deepClone(initalObj, finalObj) {
     return obj;
 }
 ```
+- 自己写一个深拷贝
+
+```js
+// 需要拷贝例子
+let oldObj = {
+  name:'酸菜鱼',
+  age:27,
+  day:new Date(),
+  do:function(){
+    console.log('写代码')
+  },
+  hobby:['码代码','追剧'],
+  friend:{
+    name:'张三',
+    age:27
+  }
+}
+// 拷贝函数
+function deepClone(obj={}){
+  // 确保长路的参数是对象并且不为空
+  if(typeof obj !== 'object' || obj == null){
+    return obj
+  }
+  // 判断参数是数组还是对象并相应赋值
+  let result;
+  if(obj instanceof Array){
+    result = [];
+  }else{
+    result = {}
+  }
+  // 遍历
+  for(let key in obj){
+    if(obj.hasOwnProperty(key)){
+      result[key] = deepClone(obj[key])
+    }
+  }
+  return result;
+}
+
+let newObj = deepClone(oldObj)
+newObj.friend.name = '里斯'
+console.log(newObj)
+console.log(oldObj)
+```
 
 
 2、数组去重

@@ -44,6 +44,22 @@ $ git config -e [--global]
 $ git config [--global] user.name "[name]"
 $ git config [--global] user.email "[email address]"
 ```
+<h5>14.1 .editorconfig文件配置</h5>
+
+```js
+// [*.{js,jsx,ts,tsx,vue}]表示只配置js,jsx,ts,tsx,vue,*表示全部
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+```
+
 <h4>1.5 Git安装</h4>
 
 [安装地址](https://git-scm.com/)
@@ -69,7 +85,7 @@ $ git clone [url]
 
 ```js
 # 添加当前目录的所有文件到暂存区
-$ git add *
+$ git add .
 
 # 提交暂存区到仓库区
 $ git commit -m [message]
@@ -270,8 +286,10 @@ $ git stash pop
 <h4>2.1 文件信息</h4>
 
 ```js
-# 显示当前分支的版本历史
+# 显示当前每条分支的合并历史
 $ git log
+–oneline –graph：可以图形化表示分支合并历史
+–author=[author name]：指定作者提交历史
 
 # 显示commit历史，以及每次commit发生变更的文件
 $ git log --stat
@@ -333,7 +351,7 @@ $ git show [commit]:[filename]
 $ git blame filepath
 
 # 显示有变更的文件
-$ git status
+$ git status -s：查询repo的状态,-s表示short,输出标记有两列,第一列是对staging区域,第二列是working目录
 
 # 显示当前分支的最近几次提交
 $ git reflog
@@ -348,8 +366,9 @@ $ git pull
 # 打开文件名
 cat [file-name]
 
-# 创建一个新的文件
-touch index.html
+# 创建一个新的文件(两种方式)
+1、touch index.html(直接新建一个文件)
+2、vi+文件名，新建一个文件并进入编辑状态（如果文件已存在，则直接进入编辑状态）
 
 # 删除文件、文件夹
 rm -rf [文件名]
@@ -364,6 +383,9 @@ cd [目录名]
 cd ..
 
 # 创建文件夹（即文件目录）
+// 在cmd下，新建文件夹命令是 md+文件夹名, md在git bash下是无效的命令。
+// 在git bash 新建文件夹命令是 mkdir+文件夹名
+// 原因是cmd和git bash是两个完全不同的工具，cmd用的是Windows自己的命令，而git bash用的是linux下的命令。
 mkdir [文件夹名字]
 
 ```

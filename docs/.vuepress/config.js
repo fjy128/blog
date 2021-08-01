@@ -1,6 +1,6 @@
 module.exports = {
-  title: 'fjy128', // 设置网站标题
-  description: 'The road ahead is long, the years are long, the years are long, the future is long', //描述
+  title: '酸菜鱼', // 设置网站标题
+  description: '酸菜鱼,又酸又菜又多余', //描述
   serviceWorker: true,
   base: "/blog/",
   themeConfig: { //主题配置
