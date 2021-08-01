@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>服务端环境搭建--mongodb | 酸菜鱼</title>
+    <meta name="description" content="酸菜鱼,又酸又菜又多余">
+    
+    
+    <link rel="preload" href="/blog/assets/css/styles.a66b9c51.css" as="style"><link rel="preload" href="/blog/assets/js/app.a66b9c51.js" as="script"><link rel="preload" href="/blog/assets/js/21.fed5e818.js" as="script"><link rel="prefetch" href="/blog/assets/css/1.styles.0eba365b.css"><link rel="prefetch" href="/blog/assets/js/1.0eba365b.js"><link rel="prefetch" href="/blog/assets/css/2.styles.48e20290.css"><link rel="prefetch" href="/blog/assets/js/2.48e20290.js"><link rel="prefetch" href="/blog/assets/js/3.4001516f.js"><link rel="prefetch" href="/blog/assets/js/4.eabb3ce6.js"><link rel="prefetch" href="/blog/assets/js/5.968ce06d.js"><link rel="prefetch" href="/blog/assets/js/6.2eb686ab.js"><link rel="prefetch" href="/blog/assets/js/7.e7bd936b.js"><link rel="prefetch" href="/blog/assets/js/8.162502d0.js"><link rel="prefetch" href="/blog/assets/js/9.dcf02b73.js"><link rel="prefetch" href="/blog/assets/js/10.1f32b392.js"><link rel="prefetch" href="/blog/assets/js/11.f10bc316.js"><link rel="prefetch" href="/blog/assets/js/12.ecc5bea0.js"><link rel="prefetch" href="/blog/assets/js/13.15226cfa.js"><link rel="prefetch" href="/blog/assets/js/14.016ab0c8.js"><link rel="prefetch" href="/blog/assets/js/15.86604bb0.js"><link rel="prefetch" href="/blog/assets/js/16.f4474910.js"><link rel="prefetch" href="/blog/assets/js/17.b3dac833.js"><link rel="prefetch" href="/blog/assets/js/18.626e27e9.js"><link rel="prefetch" href="/blog/assets/js/19.a4f05d03.js"><link rel="prefetch" href="/blog/assets/js/20.fec60d8b.js"><link rel="prefetch" href="/blog/assets/js/22.0e7782c1.js"><link rel="prefetch" href="/blog/assets/js/23.3c68fb76.js"><link rel="prefetch" href="/blog/assets/js/24.10faed2a.js">
+    <link rel="stylesheet" href="/blog/assets/css/styles.a66b9c51.css"><link rel="stylesheet" href="/blog/assets/css/1.styles.0eba365b.css"><link rel="stylesheet" href="/blog/assets/css/2.styles.48e20290.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/blog/" class="home-link router-link-active"><!----> <span class="site-name">酸菜鱼</span></a> <div class="links" style="max-width:nullpx;"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/blog/" class="nav-link">主页</a></div><div class="nav-item"><a href="/blog/baseComponents/" class="nav-link">组件文档</a></div><div class="nav-item"><a href="/blog/knowledge/" class="nav-link">知识库</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">github</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/TaoXuSheng/focus-outside" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  focus-outside
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://github.com/TaoXuSheng/stylus-converter" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  stylus-converter
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/blog/" class="nav-link">主页</a></div><div class="nav-item"><a href="/blog/baseComponents/" class="nav-link">组件文档</a></div><div class="nav-item"><a href="/blog/knowledge/" class="nav-link">知识库</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">github</span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/TaoXuSheng/focus-outside" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  focus-outside
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://github.com/TaoXuSheng/stylus-converter" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  stylus-converter
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><div class="sidebar-group first collapsable"><p class="sidebar-heading"><span>日常使用组件</span> <span class="arrow right"></span></p> <!----></div></li><li><div class="sidebar-group collapsable"><p class="sidebar-heading"><span>图表类基础知识</span> <span class="arrow right"></span></p> <!----></div></li><li><div class="sidebar-group collapsable"><p class="sidebar-heading open"><span>服务端基础知识</span> <span class="arrow down"></span></p> <ul class="sidebar-group-items"><li><a href="/blog/blog/node/http/" class="sidebar-link">http常见状态码整合</a></li><li><a href="/blog/blog/node/koa2-proxy/" class="sidebar-link">服务端代理工具--koa2-proxy</a></li><li><a href="/blog/blog/node/mongodb/" class="active sidebar-link">服务端环境搭建--mongodb</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/blog/node/mongodb/#_1、mongodb的概念" class="sidebar-link">1、mongodb的概念</a></li><li class="sidebar-sub-header"><a href="/blog/blog/node/mongodb/#_2、mongodb的安装" class="sidebar-link">2、mongodb的安装</a></li><li class="sidebar-sub-header"><a href="/blog/blog/node/mongodb/#_3、mongodb可视化工具robo-3t安装及应用" class="sidebar-link">3、mongodb可视化工具RoBo 3T安装及应用</a></li><li class="sidebar-sub-header"><a href="/blog/blog/node/mongodb/#_4、安装koa2脚手架-koa-generator" class="sidebar-link">4、安装koa2脚手架 koa-generator</a></li><li class="sidebar-sub-header"><a href="/blog/blog/node/mongodb/#_5、mongoose的作用" class="sidebar-link">5、mongoose的作用</a></li><li class="sidebar-sub-header"><a href="/blog/blog/node/mongodb/#_6、mongoose的应用" class="sidebar-link">6、mongoose的应用</a></li></ul></li></ul></div></li><li><div class="sidebar-group collapsable"><p class="sidebar-heading"><span>Div+CSS局基础知识</span> <span class="arrow right"></span></p> <!----></div></li><li><div class="sidebar-group collapsable"><p class="sidebar-heading"><span>JS基础知识</span> <span class="arrow right"></span></p> <!----></div></li><li><div class="sidebar-group collapsable"><p class="sidebar-heading"><span>项目版本管理</span> <span class="arrow right"></span></p> <!----></div></li></ul> </div> <div class="page"> <div class="content"><p>我们编写js代码时经常遇到复杂逻辑判断的情况，通常大家可以用if/else或者switch来实现多个条件判断，但这样会有个问题，随着逻辑复杂度的增加，代码中的if/else/switch会变得越来越臃肿，越来越看不懂，那么如何更优雅的写判断逻辑，本文带你试一下。
+</p> <h2 id="_1、mongodb的概念"><a href="#_1、mongodb的概念" aria-hidden="true" class="header-anchor">#</a> 1、mongodb的概念</h2> <ul><li>MongoDB 是由C++语言编写的，是一个基于分布式文件存储的开源数据库系统。</li> <li>在高负载的情况下，添加更多的节点，可以保证服务器性能。</li> <li>MongoDB 旨在为WEB应用提供可扩展的高性能数据存储解决方案。</li> <li>MongoDB 将数据存储为一个文档，数据结构由键值(key=&gt;value)对组成。MongoDB 文档类似于 JSON 对象。字段值可以包含其他文档，数组及文档数组。</li></ul> <div class="language-js extra-class"><div class="highlight-lines"><br><br><br><br><br><br><br></div><pre class="language-js"><code><span class="token punctuation">{</span>
+  name<span class="token punctuation">:</span><span class="token string">'userName'</span><span class="token punctuation">,</span>
+  age<span class="token punctuation">:</span><span class="token number">25</span><span class="token punctuation">,</span>
+  status<span class="token punctuation">:</span><span class="token string">'A'</span><span class="token punctuation">,</span>
+  groups<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'news'</span><span class="token punctuation">,</span><span class="token string">'sports'</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="_2、mongodb的安装"><a href="#_2、mongodb的安装" aria-hidden="true" class="header-anchor">#</a> 2、mongodb的安装</h2> <p>使用 brew 安装，如本地没有brew，自行安装 <a href="https://brew.sh/index_zh-cn.html">点击这里</a></p> <div class="language-js extra-class"><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br></div><pre class="language-js"><code><span class="token comment">//使用 OSX 的 brew 来安装 mongodb：</span>
+brew install mongodb
+
+<span class="token comment">//如果要安装支持 TLS/SSL 命令如下：</span>
+brew install mongodb <span class="token operator">--</span><span class="token keyword">with</span><span class="token operator">-</span>openssl
+
+<span class="token comment">//安装最新开发版本：</span>
+brew install mongodb <span class="token operator">--</span>devel
+
+<span class="token comment">//检测monogodb 安装成功与否</span>
+which mongod
+</code></pre></div><p>运行 MongoDB</p> <div class="language-js extra-class"><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br></div><pre class="language-js"><code><span class="token comment">//首先我们创建一个数据库存储目录</span>
+mkdir<span class="token operator">+</span>文件名
+
+<span class="token comment">//在当前数据库目录下查看路径</span>
+pwd
+<span class="token comment">// /Users/a/Desktop/data</span>
+
+<span class="token comment">//启动mongodb</span>
+mongod <span class="token operator">--</span>dbpath 当前文件夹路径
+<span class="token comment">//eg:mongod --dbpath /Users/a/Desktop/data</span>
+</code></pre></div><div class="warning custom-block"><p class="custom-block-title">WARNING</p> <p>安装地址： <a href="https://www.runoob.com/mongodb/mongodb-osx-install.html" target="_Blank" color="#fe6e6d">点击这里</a></p></div> <h2 id="_3、mongodb可视化工具robo-3t安装及应用"><a href="#_3、mongodb可视化工具robo-3t安装及应用" aria-hidden="true" class="header-anchor">#</a> 3、mongodb可视化工具RoBo 3T安装及应用</h2> <p>自行安装 <a href="https://robomongo.org/download">点击这里</a></p> <p>安装完成之后启动RoBo 3T,默认自动连接localhost:27017</p><p></p> <h2 id="_4、安装koa2脚手架-koa-generator"><a href="#_4、安装koa2脚手架-koa-generator" aria-hidden="true" class="header-anchor">#</a> 4、安装koa2脚手架 koa-generator</h2> <div class="language-js extra-class"><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div><pre class="language-js"><code><span class="token comment">//全局安装</span>
+npm install <span class="token operator">-</span>g koa<span class="token operator">-</span>generator 
+
+<span class="token comment">//创建项目 koa2 koa2-learn </span>
+koa2 koa2<span class="token operator">-</span>learn 
+
+<span class="token comment">//进入项目</span>
+cd koa2<span class="token operator">-</span>learn
+
+<span class="token comment">//初始化项目</span>
+npm install 
+
+<span class="token comment">//启动项目</span>
+npm run dev <span class="token comment">//实现热更新</span>
+</code></pre></div><h2 id="_5、mongoose的作用"><a href="#_5、mongoose的作用" aria-hidden="true" class="header-anchor">#</a> 5、mongoose的作用</h2> <p>经过上面的步骤，我们已经搭建了一个koa项目，进入koa项目，安装mongoose</p> <div class="language-js extra-class"><div class="highlight-lines"><br><br></div><pre class="language-js"><code>npm install mongoose
+</code></pre></div><h2>mongoose的作用</h2> <p>Mongoose是在node.js异步环境下对mongodb进行便捷操作的对象模型工具</p> <p>那么要使用它，首先你得装上node.js和mongodb,关于mongodb的安装和操作介绍可以参考：<a href="http://www.cnblogs.com/zhongweiv/p/node_mongodb.html">查看点击这里</a></p> <h2 id="_6、mongoose的应用"><a href="#_6、mongoose的应用" aria-hidden="true" class="header-anchor">#</a> 6、mongoose的应用</h2> <p><a href="https://mongoose.kkfor.com/quickstart.html">在线学习地址</a> <a href="https://www.cnblogs.com/jayruan/p/5123754.html">参考地址</a></p> <ul><li>1、首先在koa2-learn项目下创建一个文件夹dbs，用来操作数据库，</li> <li>2、在dbs文件下创建一个文件夹models和config.js,models用来存放数据表，config.js暴露数据库连接地址</li> <p>config.js 代码：</p> <div class="language-js extra-class"><div class="highlight-lines"><br><br><br><br></div><pre class="language-js"><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  dbs<span class="token punctuation">:</span> <span class="token string">'mongodb://127.0.0.1:27017/dbs'</span>
+<span class="token punctuation">}</span>
+</code></pre></div><li>3、在models下面创建一个数据表文件person.js</li> <p>person.js 代码：</p> <div class="language-js extra-class"><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div><pre class="language-js"><code><span class="token comment">// const mongoose = require('mongoose')</span>
+
+<span class="token comment">// let personSchema = new mongoose.Schema({name: String, age: Number})</span>
+
+<span class="token comment">// module.exports = mongoose.model('Person', personSchema)</span>
+
+<span class="token keyword">var</span> mongoose <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'mongoose'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> Schema <span class="token operator">=</span> mongoose<span class="token punctuation">.</span>Schema<span class="token punctuation">;</span><span class="token comment">//创建schemas的方式</span>
+
+<span class="token keyword">var</span> blogSchema <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Schema</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  name<span class="token punctuation">:</span>String<span class="token punctuation">,</span>
+  age<span class="token punctuation">:</span>Number<span class="token punctuation">,</span>
+  <span class="token comment">// title: String,</span>
+  <span class="token comment">// author: String,</span>
+  <span class="token comment">// body: String,</span>
+  <span class="token comment">// comments: [{</span>
+  <span class="token comment">//   body: String,</span>
+  <span class="token comment">//   date: Date</span>
+  <span class="token comment">// }],</span>
+  <span class="token comment">// date: {</span>
+  <span class="token comment">//   type: Date,</span>
+  <span class="token comment">//   default: Date.now</span>
+  <span class="token comment">// },</span>
+  <span class="token comment">// hidden: Boolean,</span>
+  <span class="token comment">// meta: {</span>
+  <span class="token comment">//   votes: Number,</span>
+  <span class="token comment">//   favs: Number</span>
+  <span class="token comment">// }</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> mongoose<span class="token punctuation">.</span><span class="token function">model</span><span class="token punctuation">(</span><span class="token string">'Person'</span><span class="token punctuation">,</span> blogSchema<span class="token punctuation">)</span>
+</code></pre></div><ul><h4>schemas中的数据类型有以下几种：</h4> <li>• String</li> <li>• Number</li> <li>• Date</li> <li>• Boolean</li> <li>• Buffer</li> <li>• ObjectId</li> <li>• Mixed</li> <li>• Array</li></ul> <p>特别需要说明一下ObjectId类型和Mixed类型以及Array类型，在schemas中声明这几种类型的方式如下：</p> <div class="language-js extra-class"><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div><pre class="language-js"><code><span class="token comment">//ObjectId就类似于唯一键值</span>
+ projectSchema<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+     owner<span class="token punctuation">:</span> mongoose<span class="token punctuation">.</span>Schema<span class="token punctuation">.</span>Types<span class="token punctuation">.</span>ObjectId
+ <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token comment">//混合类型，顾名思义，就是说里面可以放置任意类型的数据，有两种方式创建该类型数据</span>
+ <span class="token comment">//方式一：直接赋予一个空的字面量对象</span>
+ vardjSchema<span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">mongoose<span class="token punctuation">.</span>Schema</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+     mixedUp<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+ <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token comment">//方式二：根据Schemas.Types中值来赋予</span>
+ vardjSchema<span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">mongoose<span class="token punctuation">.</span>Schema</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+     mixedUp<span class="token punctuation">:</span> Schema<span class="token punctuation">.</span>Types<span class="token punctuation">.</span>Mixed
+ <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token comment">//Array类型数据有两种创建方式，一种是简单数组创建：</span>
+ <span class="token keyword">var</span> userSchema <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">mongoose<span class="token punctuation">.</span>Schema</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+     name<span class="token punctuation">:</span> String<span class="token punctuation">,</span>
+     emailAddresses<span class="token punctuation">:</span> <span class="token punctuation">[</span>String<span class="token punctuation">]</span>
+ <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token comment">//第二种方式就是复杂类型数据数组，例如我们可以再数组中添加不同类型的schemas:</span>
+ <span class="token keyword">var</span> emailSchema <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">mongoose<span class="token punctuation">.</span>Schema</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+     email<span class="token punctuation">:</span> String<span class="token punctuation">,</span>
+     verified<span class="token punctuation">:</span> Boolean
+ <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token keyword">var</span> userSchema <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">mongoose<span class="token punctuation">.</span>Schema</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+     name<span class="token punctuation">:</span> String<span class="token punctuation">,</span>
+     emailAddresses<span class="token punctuation">:</span> <span class="token punctuation">[</span>emailSchema<span class="token punctuation">]</span>
+ <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token comment">//注意：如果定义一个空的数据的话，则会创建为一个混合类型数据的数组：</span>
+ <span class="token keyword">var</span> emailSchema <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">mongoose<span class="token punctuation">.</span>Schema</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+     email<span class="token punctuation">:</span> String<span class="token punctuation">,</span>
+     verified<span class="token punctuation">:</span> Boolean
+ <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token keyword">var</span> userSchema <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">mongoose<span class="token punctuation">.</span>Schema</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+     name<span class="token punctuation">:</span> String<span class="token punctuation">,</span>
+     emailAddresses<span class="token punctuation">:</span> <span class="token punctuation">[</span>emailSchema<span class="token punctuation">]</span>
+ <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>修改koa2-learn下面的app.js</p> <div class="language-js extra-class"><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div><pre class="language-js"><code>
+<span class="token keyword">const</span> Koa <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'koa'</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Koa</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> views <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'koa-views'</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> json <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'koa-json'</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> onerror <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'koa-onerror'</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> bodyparser <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'koa-bodyparser'</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> logger <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'koa-logger'</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> pv <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./middleware/koa-pv'</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> m1 <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./middleware/m1'</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> m2 <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./middleware/m2'</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> m3 <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./middleware/m3'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> mongoose <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'mongoose'</span><span class="token punctuation">)</span><span class="token comment">//引入mongoose</span>
+<span class="token keyword">const</span> dbConfig <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./dbs/config'</span><span class="token punctuation">)</span><span class="token comment">//引入数据库连接地址</span>
+<span class="token keyword">const</span> index <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./routes/index'</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> users <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./routes/users'</span><span class="token punctuation">)</span>
+
+<span class="token comment">// error handler</span>
+<span class="token function">onerror</span><span class="token punctuation">(</span>app<span class="token punctuation">)</span>
+
+<span class="token comment">// middlewares</span>
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token function">bodyparser</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  enableTypes<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'json'</span><span class="token punctuation">,</span> <span class="token string">'form'</span><span class="token punctuation">,</span> <span class="token string">'text'</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">// app.use(pv())</span>
+<span class="token comment">// app.use(m1())</span>
+<span class="token comment">// app.use(m2())</span>
+<span class="token comment">// app.use(m3())</span>
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token function">logger</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'koa-static'</span><span class="token punctuation">)</span><span class="token punctuation">(</span>__dirname <span class="token operator">+</span> <span class="token string">'/public'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token function">views</span><span class="token punctuation">(</span>__dirname <span class="token operator">+</span> <span class="token string">'/views'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  extension<span class="token punctuation">:</span> <span class="token string">'ejs'</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">// logger</span>
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span>ctx<span class="token punctuation">,</span> next<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> start <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">await</span> <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">const</span> ms <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> start
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>ctx<span class="token punctuation">.</span>method<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>ctx<span class="token punctuation">.</span>url<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> - </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>ms<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">ms`</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// routes</span>
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>index<span class="token punctuation">.</span><span class="token function">routes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> index<span class="token punctuation">.</span><span class="token function">allowedMethods</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>users<span class="token punctuation">.</span><span class="token function">routes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> users<span class="token punctuation">.</span><span class="token function">allowedMethods</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">//连接数据库</span>
+mongoose<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span>dbConfig<span class="token punctuation">.</span>dbs<span class="token punctuation">,</span><span class="token punctuation">{</span>
+  useNewUrlParser<span class="token punctuation">:</span><span class="token boolean">true</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// error-handling</span>
+app<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'error'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>err<span class="token punctuation">,</span> ctx<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">'server error'</span><span class="token punctuation">,</span> err<span class="token punctuation">,</span> ctx<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> app
+
+</code></pre></div><li>4、修改user.js</li> <div class="language-js extra-class"><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div><pre class="language-js"><code><span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'koa-router'</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> Person <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'../dbs/models/person'</span><span class="token punctuation">)</span><span class="token comment">//引进模型</span>
+
+router<span class="token punctuation">.</span><span class="token function">prefix</span><span class="token punctuation">(</span><span class="token string">'/users'</span><span class="token punctuation">)</span>
+
+router<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>ctx<span class="token punctuation">,</span> next<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  ctx<span class="token punctuation">.</span>body <span class="token operator">=</span> <span class="token string">'this is a users response!'</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+router<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'/bar'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>ctx<span class="token punctuation">,</span> next<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  ctx<span class="token punctuation">.</span>body <span class="token operator">=</span> <span class="token string">'this is a users/bar response'</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">//向数据库添加数据</span>
+router<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">'/addPerson'</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>ctx<span class="token punctuation">,</span> next<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// ctx.body = 'this is a users/bar response'</span>
+  <span class="token keyword">const</span> person <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    name<span class="token punctuation">:</span>ctx<span class="token punctuation">.</span>request<span class="token punctuation">.</span>body<span class="token punctuation">.</span>name<span class="token punctuation">,</span>
+    age<span class="token punctuation">:</span>ctx<span class="token punctuation">.</span>request<span class="token punctuation">.</span>body<span class="token punctuation">.</span>age
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token keyword">let</span> code<span class="token punctuation">;</span>
+  <span class="token keyword">try</span><span class="token punctuation">{</span>
+     <span class="token keyword">await</span> person<span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//models已经定义好的方法，说不需要定义</span>
+     code <span class="token operator">=</span> <span class="token number">0</span>
+     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1111</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token keyword">catch</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    code <span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">2222222</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+  ctx<span class="token punctuation">.</span>body <span class="token operator">=</span> <span class="token punctuation">{</span>
+    code
+  <span class="token punctuation">}</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>ctx<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token comment">//adeMacBook-Air:dbs a$ curl -d 'name=fjy128&amp;age=25' http://localhost:3000/users/addPerson</span>
+
+<span class="token comment">//向数据库查询数据</span>
+router<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">'/getPerson'</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token keyword">function</span><span class="token punctuation">(</span>ctx<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> Person<span class="token punctuation">.</span><span class="token function">findOne</span><span class="token punctuation">(</span><span class="token punctuation">{</span>name<span class="token punctuation">:</span>ctx<span class="token punctuation">.</span>request<span class="token punctuation">.</span>body<span class="token punctuation">.</span>name<span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token keyword">const</span> results <span class="token operator">=</span> <span class="token keyword">await</span> Person<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token punctuation">{</span>name<span class="token punctuation">:</span>ctx<span class="token punctuation">.</span>request<span class="token punctuation">.</span>body<span class="token punctuation">.</span>name<span class="token punctuation">}</span><span class="token punctuation">)</span>
+  ctx<span class="token punctuation">.</span>body <span class="token operator">=</span> <span class="token punctuation">{</span>
+    code<span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">,</span>
+    result<span class="token punctuation">,</span>
+    results
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token comment">//adeMacBook-Air:dbs a$ curl -d 'name=fhanmeime' http://localhost:3000/users/getPerson</span>
+
+<span class="token comment">//向数据库修改数据</span>
+router<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">'/updatePerson'</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token keyword">function</span><span class="token punctuation">(</span>ctx<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> Person<span class="token punctuation">.</span><span class="token function">where</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    name<span class="token punctuation">:</span>ctx<span class="token punctuation">.</span>request<span class="token punctuation">.</span>body<span class="token punctuation">.</span>name
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    age<span class="token punctuation">:</span>ctx<span class="token punctuation">.</span>request<span class="token punctuation">.</span>body<span class="token punctuation">.</span>age
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  ctx<span class="token punctuation">.</span>body <span class="token operator">=</span> <span class="token punctuation">{</span>
+    code<span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token comment">//adeMacBook-Air:dbs a$ curl -d 'name=fjy128&amp;age=11' http://localhost:3000/users/updatePerson</span>
+
+<span class="token comment">//向数据库删除数据，一般不建议</span>
+router<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">'/removePerson'</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token keyword">function</span><span class="token punctuation">(</span>ctx<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> Person<span class="token punctuation">.</span><span class="token function">where</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    name<span class="token punctuation">:</span>ctx<span class="token punctuation">.</span>request<span class="token punctuation">.</span>body<span class="token punctuation">.</span>name
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  ctx<span class="token punctuation">.</span>body <span class="token operator">=</span> <span class="token punctuation">{</span>
+    code<span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token comment">//adeMacBook-Air:dbs a$ curl -d 'name=xm8' http://localhost:3000/users/removePersn</span>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> router
+
+</code></pre></div></ul></div> <div class="page-edit"><!----> <!----></div> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/blog/blog/node/koa2-proxy/" class="prev">
+          服务端代理工具--koa2-proxy
+        </a></span> <span class="next"><a href="/blog/blog/node/cssCenter/">
+          CSS 布局方案--居中
+        </a>
+        →
+      </span></p></div> </div> <!----></div></div>
+    <script src="/blog/assets/js/21.fed5e818.js" defer></script><script src="/blog/assets/js/app.a66b9c51.js" defer></script>
+  </body>
+</html>
