@@ -293,5 +293,65 @@ var ary4 = new Date();
 var res4 = Array.isArray(ary4);  // Output: false
 console.log(res4)
 ```
+
+3、防抖、节流
+---
+
+```js{0}
+        
+      //防抖:用户频繁操作,只要最后一次事件操作
+        <input />//html代码
+        let inp = document.querySelector('input');
+        //这个函数实现数据交互业务处理
+        inp.oninput=debounce(function(){
+          console.log(this.value)
+        },500)
+        //这个函数处理防抖的业务,使用闭包的原理
+        function debounce(fn,delay){
+          let time =null;//这里time不会是全局变量
+          return function(){
+            if(time !== null){
+              clearTimeout(time)
+            }
+            time = setTimeout(() => {
+              // setTimeout默认就是全局函数,this指向是window,改用箭头函数可以解决this指向问题
+              // console.log(this)
+              fn.call(this)//在这里this指向是input,可通过call改变this指向
+            }, delay)
+          }
+        }
+
+        //节流:控制事件输出的次数
+        body{height:2000px}//css代码
+        window.onscroll = throttle(function(){
+          console.log('输出')
+        },500);
+        function throttle(fn, delay){
+          let flag = true;
+          return function(){
+            if(flag){
+              setTimeout(() => {
+                fn.call(this);
+                flag = true
+              },delay);
+            }
+            flag =false
+          }
+        }
+        //第二种节流函数,使用时间戳
+        function throttle1(fn,delay){
+          let passTime = Date.now()
+          return function(){
+            let nowTime = Date.now()
+            if(nowTime - passTime >= delay){
+              fn.call(this)
+              passTime = Date.now()
+            }
+          }
+        }
+        window.onscroll = throttle1(function(){
+          console.log(this)
+        },500)
+```
 [参考原来链接：](http://blog.csdn.net/i10630226)
 [参考原来链接：](https://juejin.im/post/5d82c12ff265da03a31d6f92)
