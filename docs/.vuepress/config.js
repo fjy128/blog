@@ -75,6 +75,7 @@ module.exports = {
           '/blog/node/mianshiti/',
           '/blog/node/youyaxunhuan/',
           '/blog/node/regExp/',
+          '/blog/node/mobile/',
         ]
       },
       {

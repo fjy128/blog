@@ -385,6 +385,77 @@ multiply(2, 3); // => 6
 ---
 <p>ES6 中的 Symbol 也是一种数据类型，但是不是字符串，也不是对象，而是一种新的数据类型：第七种数据类型</p>
 
+```js{0}
+//js基本类型包括:undefined、null、number、string、boolen、object、symbol(第七种类型)
+  const sym = Symbol();
+  console.log(typeof sym)//输出symbol,能用typeof检测的类型就是原始类型
+
+  //1、特点--加描述
+  const sym1 = Symbol('abc');
+  console.log(sym1)//输出Symbol(abc),symbol的描述就是symbol(abc);
+
+
+  //2、可以当作对象的属性名
+  const level = Symbol('level')//变量当属性名就需要使用中括号
+  const level1 = Symbol('level')
+  const student = {
+    name:'小明',
+    age:23,
+    [level]:'优秀'
+  }
+  /*
+  Symbol属性不能被for...in获取
+  (不能被遍历,可以做到某些信息不被暴露;evel不能遍历出来,这也是Symbol的作用)
+  */
+  for(let pro in student){
+    console.log(pro)//输出name,age;
+  }
+
+  //3、两个symbol是不相等(重新定义一个新的Symbol)
+  console.log(level === level1)//false
+
+
+  //4、获取对象里面所有值(不能调用for...of.因为for...of需要key.iterator)
+  const student1 = {
+      name: '小明',
+      age: 23,
+      [Symbol('level')]: '优秀',
+      [Symbol('level')]: '富有'
+    }
+    //Object.keys、Object.getOwnPropertyNames拿不到Symbol
+    console.log(Object.keys(student1))// ["name", "age"]
+    let prop = Object.getOwnPropertyNames(student)
+    console.log(prop)//["name", "age"]
+    for(let i in student){
+      console.log(i)//name,age
+    }
+    //下面就可以拿到symbol的值
+    let porpSym = Object.getOwnPropertySymbols(student1)
+    console.log(porpSym)
+    for(let iSym of porpSym){
+      console.log(student1[iSym])
+    }
+
+    //5、Symbol.iterator是一个内置的值
+      const student2 = {
+          name: '小红',
+          age: 23,
+          [Symbol('level')]: '良好',
+          [Symbol('level')]: '富有'
+        }
+        let arr = [1,2,3,4,5,6]
+        //检测student有没有Symbol.iterator
+        console.log(student[Symbol.iterator])//undefined,没有Symbol.iterator
+        console.log(arr[Symbol.iterator])// values() { [native code] },有
+        //总结:如果对象有Symbol.iterator这个属性就可以被for...of遍历
+        // for(let stuI of student2){//这个函数因为student2没有Symbol.iterator,所以执行的时候会报错
+        //   console.log(stuI)
+        // }
+        for(let arrI of arr){
+          console.log(arrI)//1,2,3,4,5,6
+        }
+```
+
 6、Set 和 Map
 ---
 <h5></h5>
