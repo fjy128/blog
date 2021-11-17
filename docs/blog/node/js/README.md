@@ -370,7 +370,7 @@ function deepClone(initalObj, finalObj) {
 ```js
 // 需要拷贝例子
 let oldObj = {
-  name:'酸菜鱼',
+  name:'fjyのSuanCaiFish',
   age:27,
   day:new Date(),
   do:function(){

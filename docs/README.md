@@ -2,7 +2,7 @@
 home: true
 heroImage: /logo.gif
 # heroImage: /hero.png
-actionText: 进入 →
+actionText: Go →
 actionLink: /blog/node/koa2-proxy/
 features:
 - title: Simplicity First

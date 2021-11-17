@@ -1,6 +1,6 @@
 module.exports = {
-  title: '酸菜鱼', // 设置网站标题
-  description: '酸菜鱼,又酸又菜又多余', //描述
+  title: 'fjyのSuanCaiFish', // 设置网站标题
+  description: 'SuanCaiFish,Is the original dream still there? The world is full of disquiet and confusion, whether it disturbs your pace of progress. Originally, I thought it could be two people, but I was alone from beginning to end', //描述
   serviceWorker: true,
   base: "/blog/",
   themeConfig: { //主题配置
@@ -76,6 +76,7 @@ module.exports = {
           '/blog/node/youyaxunhuan/',
           '/blog/node/regExp/',
           '/blog/node/mobile/',
+          '/blog/node/56JS/',
         ]
       },
       {
